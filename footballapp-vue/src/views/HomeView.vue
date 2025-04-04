@@ -4,7 +4,6 @@ import filteredPlayers from '@/components/filteredPlayers.vue'
 
 <template>
   <main>
-    welcome to cwel games
     <filteredPlayers />
   </main>
 </template>

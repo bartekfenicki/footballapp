@@ -2,23 +2,12 @@
   <div class="game-container">
     <h1>Guess the Football Player</h1>
 
-    <!-- Input Field with Autocomplete -->
-    <div class="input-container">
-      <input
-        v-model="userGuess"
-        @input="filterSuggestions"
-        @keyup.enter="checkGuess"
-        placeholder="Enter player's name"
-        class="guess-input"
-      />
-      <ul v-if="filteredSuggestions.length" class="suggestions-list">
-        <li v-for="(player, index) in filteredSuggestions" :key="index" @click="selectSuggestion(player.name)">
-          {{ player.name }}
-        </li>
-      </ul>
-    </div>
-
-    <button @click="checkGuess">Submit</button>
+    <!-- Input Field -->
+    <AutocompleteInput v-if = "!gameWon"
+  v-model="userGuess"
+  :suggestions="playerNames"
+  @submitted="checkGuess"
+    />
 
     <!-- Display Guess Feedback in a Table -->
     <div v-if="guessHistory.length > 0" class="guess-table">
@@ -55,8 +44,12 @@
 
 <script>
 import playersData from "@/players.js";
+import AutocompleteInput from "./autoInput.vue";
 
 export default {
+  components: {
+    AutocompleteInput
+  },
   data() {
     return {
       players: playersData,
@@ -66,6 +59,11 @@ export default {
       gameWon: false,
       filteredSuggestions: []
     };
+  },
+  computed: {
+    playerNames() {
+      return this.players.map(player => `${player.name}`);
+    }
   },
   methods: {
     startNewGame() {

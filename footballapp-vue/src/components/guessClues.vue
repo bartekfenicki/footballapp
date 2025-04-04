@@ -9,17 +9,12 @@
         <p v-for="(clue, index) in revealedClues" :key="index" class="clue">Clue {{ index + 1 }}: {{ clue }}</p>
 
     </div>
-    <div class="input-container">
-      <input v-if="!gameWon" class="input-field" v-model="userGuess" @input="filterSuggestions" placeholder="Enter player name" />
-      <ul v-if="filteredSuggestions.length" class="suggestions">
-      <li v-for="(suggestion, index) in filteredSuggestions" :key="index" @click="selectSuggestion(suggestion)">
-        {{ suggestion }}
-      </li>
-    </ul>
-    </div>
-    <button v-if="!gameWon" @click="checkGuess">Submit Guess</button>
 
-    <!-- <p class="lives">Lives left: {{ lives }}</p> -->
+    <AutocompleteInput v-if = "!gameWon"
+  v-model="userGuess"
+  :suggestions="playerNames"
+  @submitted="checkGuess"
+    />
 
     <p class="lives">Lives left:</p>
 <div class="lives-container">
@@ -59,8 +54,12 @@
 
 <script>
 import playersData from "@/playersClues.js";
+import AutocompleteInput from "./autoInput.vue";
 
 export default {
+  components: {
+    AutocompleteInput
+  },
   data() {
     return {
       players: playersData,
@@ -73,6 +72,11 @@ export default {
       gameWon: false,
       filteredSuggestions: [],
     };
+  },
+  computed: {
+    playerNames() {
+      return this.players.map(player => `${player.firstName} ${player.lastName}`);
+    }
   },
   methods: {
     startNewGame() {

@@ -9,7 +9,6 @@ import { RouterLink } from 'vue-router';
       <nav>
         <RouterLink to="/">Home</RouterLink>
         <RouterLink to="/tic-tac-toe">Tic Tac Toe</RouterLink>
-        <RouterLink to="/guessingGame">Guess The Player</RouterLink>
         <RouterLink to="/cluesGame">Guess the Clues</RouterLink>
         <RouterLink to="/footdle">Footdle</RouterLink>
         <RouterLink to="/careerPath">Career Path</RouterLink>

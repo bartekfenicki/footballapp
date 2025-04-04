@@ -1,24 +1,27 @@
 <template>
   <div class="input-container">
-    <!-- Input Field -->
-    <input
-      v-model="userInput"
-      @input="filterSuggestions"
-      @keyup.enter="emitSelection"
-      placeholder="Enter player's name"
-      class="guess-input"
-    />
+    <!-- Input Wrapper -->
+    <div class="relative w-full">
+      <input
+        v-model="userInput"
+        @input="filterSuggestions"
+        @keyup.enter="emitSelection"
+        placeholder="Enter player's name"
+        class="guess-input"
+      />
 
-    <!-- Suggestions List -->
-    <ul v-if="filteredSuggestions.length" class="suggestions-list">
-      <li
-        v-for="(suggestion, index) in filteredSuggestions"
-        :key="index"
-        @click="selectSuggestion(suggestion)"
-      >
-        {{ suggestion }}
-      </li>
-    </ul>
+      <!-- Suggestions List -->
+      <ul v-if="filteredSuggestions.length" class="suggestions-list">
+        <li
+          v-for="(suggestion, index) in filteredSuggestions"
+          :key="index"
+          @click="selectSuggestion(suggestion)"
+        >
+          {{ suggestion }}
+        </li>
+      </ul>
+    </div>
+
     <button class="btn submit-btn" @click="emitSelection">Submit</button>
   </div>
 </template>
@@ -77,17 +80,26 @@ export default {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 5px;
+  gap: 10px;
+}
+
+.relative {
+  position: relative;
+  width: 100%;
 }
 
 .guess-input {
-  flex: 1;
+  width: 100%;
   padding: 10px;
   color: #000;
+  border: 1px solid #ccc;
+  border-radius: 5px;
 }
 
 .suggestions-list {
   position: absolute;
+  left: 0;
+  top: 100%; /* This ensures the list appears below the input */
   width: 100%;
   background: white;
   border: 1px solid #ccc;
@@ -101,12 +113,17 @@ export default {
 }
 
 .suggestions-list li {
-  padding: 5px;
+  padding: 10px;
   cursor: pointer;
+  border-bottom: 1px solid #ddd;
+}
+
+.suggestions-list li:last-child {
+  border-bottom: none;
 }
 
 .suggestions-list li:hover {
-  background: #ddd;
+  background: #f0f0f0;
 }
 
 .btn {
@@ -119,7 +136,8 @@ export default {
   color: white;
   transition: all 0.3s ease;
 }
-.submit-btn{
+
+.submit-btn {
   width: 200px;
   margin: 0 auto;
 }
