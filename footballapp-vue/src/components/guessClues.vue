@@ -115,23 +115,6 @@ export default {
       this.userGuess = "";
       this.filteredSuggestions = [];
     },
-    filterSuggestions() {
-        if (this.userGuess.length === 0) {
-        this.filteredSuggestions = [];
-        return;
-      }
-      const input = this.userGuess.toLowerCase();
-      this.filteredSuggestions = this.players
-        .filter(player =>
-          player.firstName.toLowerCase().startsWith(input) ||
-          player.lastName.toLowerCase().startsWith(input)
-        )
-        .map(player => `${player.firstName} ${player.lastName}`);
-    },
-    selectSuggestion(name) {
-      this.userGuess = name;
-      this.filteredSuggestions = [];
-    }
   },
   mounted() {
     this.startNewGame();

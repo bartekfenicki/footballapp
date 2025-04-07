@@ -89,23 +89,6 @@ export default {
       this.userGuess = "";
       this.filteredSuggestions = [];
     },
-
-    filterSuggestions() {
-      if (this.userGuess.length === 0) {
-        this.filteredSuggestions = [];
-        return;
-      }
-
-      this.filteredSuggestions = this.players.filter(player =>
-        player.name.toLowerCase().includes(this.userGuess.toLowerCase())
-      );
-    },
-
-    selectSuggestion(name) {
-      this.userGuess = name;
-      this.filteredSuggestions = [];
-    },
-
     getMatchClass(guess, correct) {
       return guess === correct ? "match" : "wrong";
     },

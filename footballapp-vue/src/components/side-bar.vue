@@ -7,10 +7,10 @@ import { RouterLink } from 'vue-router';
     <aside class="sidebar">
       <div class="logo">My Logo</div>
       <nav>
-        <RouterLink to="/">Home</RouterLink>
+        <RouterLink to="/">Browse Players</RouterLink>
         <RouterLink to="/tic-tac-toe">Tic Tac Toe</RouterLink>
         <RouterLink to="/cluesGame">Guess the Clues</RouterLink>
-        <RouterLink to="/footdle">Footdle</RouterLink>
+        <RouterLink to="/footdle">Footballdle</RouterLink>
         <RouterLink to="/careerPath">Career Path</RouterLink>
       </nav>
     </aside>

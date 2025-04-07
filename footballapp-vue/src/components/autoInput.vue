@@ -50,6 +50,7 @@ export default {
     }
   },
   methods: {
+    // suggestions based on the search listed
     filterSuggestions() {
       if (this.userInput.length === 0) {
         this.filteredSuggestions = [];
@@ -60,11 +61,13 @@ export default {
         suggestion.toLowerCase().includes(this.userInput.toLowerCase())
       );
     },
+    // selecting a player functionality
     selectSuggestion(suggestion) {
       this.userInput = suggestion;
       this.filteredSuggestions = [];
       this.$emit("update:modelValue", suggestion);
     },
+    // submitting a choice mechanic emitted to the parent
     emitSelection() {
       this.$emit("update:modelValue", this.userInput);
       this.$emit("submitted", this.userInput);

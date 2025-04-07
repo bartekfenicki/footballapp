@@ -17,28 +17,11 @@
     </div>
 
     <!-- Input Field with Autocomplete -->
-    <!-- <div v-if="!gameWon" class="input-container">
-      <input
-        v-model="userGuess"
-        @input="filterSuggestions"
-        @keyup.enter="checkGuess"
-        placeholder="Enter player's name"
-        class="guess-input"
-      />
-      <ul v-if="filteredSuggestions.length" class="suggestions-list">
-        <li v-for="(player, index) in filteredSuggestions" :key="index" @click="selectSuggestion(player.name)">
-          {{ player.name }}
-        </li>
-      </ul>
-
-      <button class="btn" @click="checkGuess">Submit</button>
-    </div> -->
-
     <AutocompleteInput v-if = "!gameWon"
-  v-model="userGuess"
-  :suggestions="playerNames"
-  @submitted="checkGuess"
-/>
+      v-model="userGuess"
+      :suggestions="playerNames"
+      @submitted="checkGuess"
+        />
 
 
     <!-- Restart Button -->
@@ -47,7 +30,7 @@
     <!-- Game Over Message -->
     <transition name="fade">
       <div v-if="gameOver" class="game-over">
-        ❌ Game Over! The correct player was
+         Game Over! The correct player was
         <strong>{{ correctPlayer.first_name }} {{ correctPlayer.last_name }}</strong>.
         <button @click="startNewGame" class="btn">Try Again</button>
       </div>
@@ -88,12 +71,14 @@ export default {
     }
   },
   methods: {
+    // function that allows me to display previous and current club of a player
     getClubLogos() {
       if (!this.correctPlayer) return [];
       const previousClubs = this.correctPlayer.previous_clubs ?? []; // Ensure array
       const currentClub = this.correctPlayer.current_club ? [this.correctPlayer.current_club] : [];
-      return previousClubs.concat(currentClub);
+      return previousClubs.concat(currentClub); // combines two arrays
     },
+    // starting a new game and setting all the values
     startNewGame() {
       this.correctPlayer = this.players[Math.floor(Math.random() * this.players.length)];
       this.userGuess = "";
