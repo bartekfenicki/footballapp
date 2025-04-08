@@ -1,6 +1,6 @@
 <template>
   <div class="game-container">
-    <h1>Guess the Footballer by Career Path</h1>
+    <h1 data-testid="game-title-message">Guess the Footballer by Career Path</h1>
 
     <!-- Lives Display -->
     <div class="lives">{{ lives }} Lives Remaining</div>
@@ -29,7 +29,7 @@
 
     <!-- Game Over Message -->
     <transition name="fade">
-      <div v-if="gameOver" class="game-over">
+      <div v-if="gameOver" data-testid="game-over-message" class="game-over">
          Game Over! The correct player was
         <strong>{{ correctPlayer.first_name }} {{ correctPlayer.last_name }}</strong>.
         <button @click="startNewGame" class="btn">Try Again</button>

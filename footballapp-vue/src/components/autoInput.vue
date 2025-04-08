@@ -8,6 +8,7 @@
         @keyup.enter="emitSelection"
         placeholder="Enter player's name"
         class="guess-input"
+        data-testid="guess-input"
       />
 
       <!-- Suggestions List -->
