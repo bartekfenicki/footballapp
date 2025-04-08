@@ -32,7 +32,10 @@ jobs:
         - name: NPM install, build and test
           run: 
             npm install
-            npm test
+            
+        - name: NPM test
+          run: 
+              npm test
 
   deploy:
         name: Deploy to GitHub Pages
@@ -53,6 +56,7 @@ jobs:
           
           - name: Build project
             run: npm run build
+            working-directory: ./
           
           - name: Deploy to GitHub Pages
             uses: peaceiris/actions-gh-pages@v3
