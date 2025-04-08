@@ -31,7 +31,7 @@ jobs:
       - name: Install Playwright Browsers
         run: npx playwright install 
 
-      - name: Run Tests base url
+      - name: Tests base url environments
         run: |
           export BASE_URL="https://bartekfenicki.github.io/footballapp/"
 
@@ -39,7 +39,7 @@ jobs:
         run: |
             npx playwright test
 
-            
+
   deploy:
     name: Deploy to GitHub Pages
     needs: test  
