@@ -2,7 +2,8 @@ import { test, expect } from '@playwright/test';
 
 test.describe('Filtered Players View', () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto('http://localhost:5173');
+    const baseURL = import.meta.env.VITE_BASE_URL || 'http://localhost:5173';
+    await page.goto(`${baseURL}/`);
   });
 
   test('loads the page and shows filtering options', async ({ page }) => {

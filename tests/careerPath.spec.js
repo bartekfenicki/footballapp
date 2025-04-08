@@ -2,7 +2,8 @@ import { test, expect } from '@playwright/test';
 
 test.describe('Career Path Game View', () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto('http://localhost:5173/careerPath');
+    const baseURL = import.meta.env.VITE_BASE_URL || 'http://localhost:5173';
+    await page.goto(`${baseURL}/careerPath`);
   });
 
   test('starts game and shows career path game', async ({ page }) => {

@@ -1,66 +1,68 @@
-name: NODE.JS CI/CD Bartek main
-
 on:
-    push:
-        branches: [main]
+  push:
+    branches: [main]
 
 permissions:
   contents: write
 
 jobs:
-
   test:
-
     name: Test on Push Bartek Fenicki
     runs-on: ubuntu-latest
 
     strategy:
-        matrix: 
-            node-version: [18.x]
-    
+      matrix: 
+        node-version: [18.x]
+
     steps:
-        - name: Checkout
-          uses: actions/checkout@v2
-          with: 
-            fetch-depth: 0
+      - name: Checkout
+        uses: actions/checkout@v2
+        with: 
+          fetch-depth: 0
 
-        - name: use Node.JS ${{ matrix.node-version }}
-          uses: actions/setup-node@v2
-          with: 
-            node-version: ${{ matrix.node-version }}
-        
-        - name: NPM install, build and test
-          run: 
-            npm install
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v2
+        with: 
+          node-version: ${{ matrix.node-version }}
+      
+      - name: Install dependencies
+        run: npm install
 
-        - name: NPM test
-          run: 
-              npx playwright test
+      - name: Install Playwright Browsers
+        run: npx playwright install 
 
+      - name: Run Tests base url
+        run: |
+          export BASE_URL="https://bartekfenicki.github.io/footballapp/"
+
+      - name: Run Tests
+        run: |
+            npx playwright test
+
+            
   deploy:
-        name: Deploy to GitHub Pages
-        needs: test  # Only run this job if "test" passes
-        runs-on: ubuntu-latest
-          
-        steps:
-          - name: Checkout repository
-            uses: actions/checkout@v2
-          
-          - name: Use Node.js
-            uses: actions/setup-node@v2
-            with:
-                node-version: 18.x
-          
-          - name: Install dependencies
-            run: npm install
-          
-          - name: Build project
-            run: npm run build
-            working-directory: ./
-          
-          - name: Deploy to GitHub Pages
-            uses: peaceiris/actions-gh-pages@v3
-            with:
-                github_token: ${{ secrets.GITHUB_TOKEN }}
-                publish_dir: ./dist
+    name: Deploy to GitHub Pages
+    needs: test  
+    runs-on: ubuntu-latest
 
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      
+      - name: Use Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 18.x
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build project
+        run: npm run build
+        working-directory: ./
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist
