@@ -35,6 +35,12 @@ jobs:
         run: |
           export BASE_URL="https://bartekfenicki.github.io/footballapp/"
 
+      - name: Start Vite server
+        run: npm run dev & 
+
+      - name: Wait for the server to be ready
+        run: sleep 10
+
       - name: Run Tests
         run: |
             npx playwright test
