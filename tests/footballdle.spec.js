@@ -3,7 +3,7 @@ import { test, expect } from '@playwright/test';
 test.describe('Footballdle Game View', () => {
   test.beforeEach(async ({ page }) => {
     const baseURL = process.env.VITE_BASE_URL || 'http://localhost:5173';
-    await page.goto(`${baseURL}/footdle`);
+    await page.goto(`${baseURL}/footballapp/footdle`);
   });
 
   test('starts game and shows player guessing interface', async ({ page }) => {

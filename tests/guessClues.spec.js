@@ -3,7 +3,7 @@ import { test, expect } from '@playwright/test';
 test.describe('Clues Game View', () => {
   test.beforeEach(async ({ page }) => {
     const baseURL = process.env.VITE_BASE_URL || 'http://localhost:5173';
-    await page.goto(`${baseURL}/cluesGame`);
+    await page.goto(`${baseURL}/footballapp/cluesGame`);
   });
 
   test('starts game and shows clues', async ({ page }) => {

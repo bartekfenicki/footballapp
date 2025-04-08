@@ -3,7 +3,7 @@ import { test, expect } from '@playwright/test';
 test.describe('Filtered Players View', () => {
   test.beforeEach(async ({ page }) => {
     const baseURL = process.env.VITE_BASE_URL || 'http://localhost:5173';
-    await page.goto(`${baseURL}/`);
+    await page.goto(`${baseURL}/footballapp/`);
   });
 
   test('loads the page and shows filtering options', async ({ page }) => {

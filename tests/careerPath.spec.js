@@ -3,7 +3,7 @@ import { test, expect } from '@playwright/test';
 test.describe('Career Path Game View', () => {
   test.beforeEach(async ({ page }) => {
     const baseURL = process.env.VITE_BASE_URL || 'http://localhost:5173';
-    await page.goto(`${baseURL}/careerPath`);
+    await page.goto(`${baseURL}/footballapp/careerPath`);
   });
 
   test('starts game and shows career path game', async ({ page }) => {
