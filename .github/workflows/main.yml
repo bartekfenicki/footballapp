@@ -32,10 +32,10 @@ jobs:
         - name: NPM install, build and test
           run: 
             npm install
-            
+
         - name: NPM test
           run: 
-              npm test
+              npx playwright test
 
   deploy:
         name: Deploy to GitHub Pages
