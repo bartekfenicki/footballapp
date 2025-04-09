@@ -1,3 +1,5 @@
+name: CI/CD Bartek
+
 on:
   push:
     branches: [main]
