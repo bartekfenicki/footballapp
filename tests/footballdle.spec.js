@@ -17,7 +17,7 @@ test.describe('Footballdle Game View', () => {
   });
 
   test('displays winning message after correct guess', async ({ page }) => {
-    // Start the game
+
     await page.getByText('Start Game').click();
 
     const allPlayers = ['Lionel Messi', 'Cristiano Ronaldo'];
@@ -38,13 +38,10 @@ test.describe('Footballdle Game View', () => {
   });
 
 
-
-  // Test to check the player's guess history display
   test('displays guess history correctly', async ({ page }) => {
 
     await page.getByText('Start Game').click();
 
-    // Make some guesses
     const wrongGuesses = ['Cristiano Ronaldo', 'Lionel Messi'];
     for (const guess of wrongGuesses) {
       await page.getByTestId('guess-input').fill(guess);

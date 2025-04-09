@@ -33,7 +33,7 @@ test.describe('Clues Game View', () => {
   });
 
   test('displays winning message after correct guess', async ({ page }) => {
-    // Start the game
+
     await page.getByText('Start Game').click();
 
     const allPlayers = ['Lionel Messi'];
@@ -53,17 +53,15 @@ test.describe('Clues Game View', () => {
   });
 
   test('game over if lives reach 0', async ({ page }) => {
-    // Start the game
+
     await page.getByText('Start Game').click();
 
-    // Make wrong guesses until lives are 0
     const wrongGuesses = ['Wrong Player 1', 'Wrong Player 2', 'Wrong Player 3', 'Wrong Player 4', 'Wrong Player 5', 'Wrong Player 6'];
     for (const guess of wrongGuesses) {
       await page.getByTestId('guess-input').fill(guess);
       await page.getByText('Submit').click();
     }
 
-    // Ensure game over message appears when lives are 0
     await expect(page.locator('.result')).toContainText('Game Over! The correct player was:');
   });
 });
