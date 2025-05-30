@@ -49,6 +49,7 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
+   perspective: 500px;
 }
 
 .welcome-container {
@@ -60,19 +61,80 @@ export default {
   width: 90%;
   max-width: 500px;
   animation: fadeIn 1s ease-in-out;
+  --darker: #1e1e1e;
+  --semidark: #2c2c2c;
+  --lightgray: #e8e8e8;
+  --unit: 10px;
+  background-color: var(--darker);
+  box-shadow: 0 0 var(--unit) var(--darker);
+  border: calc(var(--unit) / 2) solid var(--darker);
+  border-radius: var(--unit);
+  position: relative;
+  padding: var(--unit);
+  overflow: hidden;
+}
+
+
+.welcome-container::before {
+  content: "";
+  position: absolute;
+  width: 120%;
+  height: 20%;
+  top: 40%;
+  left: -10%;
+  background: linear-gradient(144deg, #37FF8B, #af40ff 50%, #37FF8B);
+  animation: keyframes-floating-light 2.5s infinite ease-in-out;
+  filter: blur(20px);
+}
+
+@keyframes keyframes-floating-light {
+  0% {
+    transform: rotate(-5deg) translateY(-5%);
+    opacity: 0.5;
+  }
+
+  50% {
+    transform: rotate(5deg) translateY(5%);
+    opacity: 1;
+  }
+
+  100% {
+    transform: rotate(-5deg) translateY(-5%);
+    opacity: 0.5;
+  }
+}
+
+.welcome-container:after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0%;
+  left: 0%;
+  background: linear-gradient(144deg, #37FF8B, #af40ff 50%, #37FF8B);
+  filter: blur(20px);
+  pointer-events: none;
+  animation: keyframes-intro 1s ease-in forwards;
+}
+
+@keyframes keyframes-intro {
+  100% {
+    ransform: translate(-100%);
+    opacity: 0;
+  }
 }
 
 
 .title {
   font-size: 32px;
   font-weight: bold;
-  color: #333;
+  color: #fff;
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
 }
 
 .rules-heading {
   font-size: 18px;
-  color: #666;
+  color: #fff;
   margin-top: 10px;
 }
 
