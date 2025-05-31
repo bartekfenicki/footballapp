@@ -44,7 +44,7 @@
 
 <script>
 import playersData from "@/players.js";
-import AutocompleteInput from "./autoInput.vue";
+import AutocompleteInput from "../autoInput.vue";
 
 export default {
   components: {

@@ -9,7 +9,7 @@
           <li>You get four tries to guess the correct football player.</li>
           <li>Use your football knowledge to guess as fast as possible!</li>
         </ul>
-        <button class="start-btn" @click="startGame">Start Game</button>
+        <startGameBtn @click="startGame" />
       </div>
     </transition>
   </div>
@@ -20,12 +20,14 @@
 
 <script>
 import { ref } from "vue";
-import CareerPath from "../components/careerPath.vue";
+import CareerPath from "../components/games/careerPath.vue";
+import startGameBtn from "@/components/animated-elements/startGameBtn.vue";
 
 export default {
   name: "GuessCluesView",
   components: {
     CareerPath,
+    startGameBtn
   },
   setup() {
     const gameStarted = ref(false);
@@ -49,7 +51,6 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-   perspective: 500px;
 }
 
 .welcome-container {
@@ -73,37 +74,6 @@ export default {
   padding: var(--unit);
   overflow: hidden;
 }
-
-
-.welcome-container::before {
-  content: "";
-  position: absolute;
-  width: 120%;
-  height: 20%;
-  top: 40%;
-  left: -10%;
-  background: linear-gradient(144deg, #37FF8B, #af40ff 50%, #37FF8B);
-  animation: keyframes-floating-light 2.5s infinite ease-in-out;
-  filter: blur(20px);
-}
-
-@keyframes keyframes-floating-light {
-  0% {
-    transform: rotate(-5deg) translateY(-5%);
-    opacity: 0.5;
-  }
-
-  50% {
-    transform: rotate(5deg) translateY(5%);
-    opacity: 1;
-  }
-
-  100% {
-    transform: rotate(-5deg) translateY(-5%);
-    opacity: 0.5;
-  }
-}
-
 .welcome-container:after {
   content: "";
   position: absolute;
@@ -111,7 +81,7 @@ export default {
   height: 100%;
   top: 0%;
   left: 0%;
-  background: linear-gradient(144deg, #37FF8B, #af40ff 50%, #37FF8B);
+  background: linear-gradient(144deg, #37FF8B, #000 50%, #37FF8B);
   filter: blur(20px);
   pointer-events: none;
   animation: keyframes-intro 1s ease-in forwards;
@@ -123,7 +93,6 @@ export default {
     opacity: 0;
   }
 }
-
 
 .title {
   font-size: 32px;
@@ -156,25 +125,6 @@ export default {
   display: flex;
   align-items: center;
   gap: 10px;
-}
-
-/* Start Button */
-.start-btn {
-  background: linear-gradient(135deg, #28a745, #218838);
-  color: white;
-  padding: 12px 24px;
-  font-size: 18px;
-  font-weight: bold;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: transform 0.2s ease, background 0.3s ease;
-  margin-top: 20px;
-}
-
-.start-btn:hover {
-  background: linear-gradient(135deg, #218838, #1e7e34);
-  transform: scale(1.05);
 }
 
 /* Fade Transition */

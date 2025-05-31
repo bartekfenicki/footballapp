@@ -1,6 +1,6 @@
 <template>
   <div v-if="players" class="container">
-    <h2>Players</h2>
+    <h2 class="text">Players</h2>
 
     <!-- Tabs -->
     <div class="tabs">
@@ -16,7 +16,7 @@
 
     <!-- All Players List -->
     <div v-if="activeTab === 'All Players'">
-      <h3>All Players</h3>
+      <h3 class="text">All Players</h3>
       <ul class="player-list">
         <li v-for="player in players" :key="player.id" class="player-card">
           <strong>{{ player.name }}</strong> <br>
@@ -30,7 +30,7 @@
 
     <!-- Search by Position -->
     <div v-if="activeTab === 'Position'">
-      <h3>Filter by Position</h3>
+      <h3 class="text">Filter by Position</h3>
       <select v-model="selectedPosition" class="input-field">
         <option value="">All Positions</option>
         <option value="Goalkeeper">Goalkeeper</option>
@@ -51,7 +51,7 @@
 
     <!-- Search by Nationality -->
     <div v-if="activeTab === 'Nationality'">
-      <h3>Filter by Nationality</h3>
+      <h3 class="text">Filter by Nationality</h3>
       <input type="text" v-model="selectedNationality" class="input-field" placeholder="Enter Nationality">
       <ul class="player-list">
         <li v-for="player in filteredPlayersNationality" :key="player.id" class="player-card">
@@ -65,7 +65,7 @@
 
     <!-- Search by Club -->
     <div v-if="activeTab === 'Club'">
-      <h3>Filter by Club</h3>
+      <h3 class="text">Filter by Club</h3>
       <input type="text" v-model="selectedClub" class="input-field" placeholder="Enter Club">
       <ul class="player-list">
         <li v-for="player in filteredPlayersClub" :key="player.id" class="player-card">
@@ -79,7 +79,7 @@
 
     <!-- Filter by Goals & Assists -->
     <div v-if="activeTab === 'Goals & Assists'">
-      <h3>Filter by Goals & Assists</h3>
+      <h3 class="text">Filter by Goals & Assists</h3>
       <input type="number" v-model="numberGoals" class="input-field" placeholder="Min Goals">
       <input type="number" v-model="numberAssists" class="input-field" placeholder="Min Assists">
       <ul class="player-list">
@@ -163,6 +163,9 @@ export default {
 
 h2 {
   margin-bottom: 15px;
+}
+.text {
+  color: white;
 }
 
 .tabs {

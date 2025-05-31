@@ -54,7 +54,7 @@
 
 <script>
 import playersData from "@/playersClues.js";
-import AutocompleteInput from "./autoInput.vue";
+import AutocompleteInput from "../autoInput.vue";
 
 export default {
   components: {
@@ -285,7 +285,7 @@ export default {
 .life {
   width: 40px;
   height: 40px;
-  background-image: url('../assets/icons/football.png');
+  background-image: url('../../assets/icons/football.png');
   background-size: cover;
   background-position: center;
   transition: opacity 1s ease-in-out;

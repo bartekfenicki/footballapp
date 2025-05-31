@@ -10,7 +10,7 @@
           <li>After each guess, a new clue will be revealed.</li>
           <li>Use your football knowledge to guess as fast as possible!</li>
         </ul>
-        <button class="start-btn" @click="startGame">Start Game</button>
+        <startGameBtn @click="startGame" />
       </div>
     </transition>
   </div>
@@ -21,12 +21,14 @@
 
 <script>
 import { ref } from "vue";
-import GuessClues from "../components/guessClues.vue";
+import GuessClues from "../components/games/guessClues.vue";
+import startGameBtn from "@/components/animated-elements/startGameBtn.vue";
 
 export default {
   name: "GuessCluesView",
   components: {
     GuessClues,
+    startGameBtn,
   },
   setup() {
     const gameStarted = ref(false);
@@ -61,19 +63,48 @@ export default {
   width: 90%;
   max-width: 500px;
   animation: fadeIn 1s ease-in-out;
+  --darker: #1e1e1e;
+  --semidark: #2c2c2c;
+  --lightgray: #e8e8e8;
+  --unit: 10px;
+  background-color: var(--darker);
+  box-shadow: 0 0 var(--unit) var(--darker);
+  border: calc(var(--unit) / 2) solid var(--darker);
+  border-radius: var(--unit);
+  position: relative;
+  padding: var(--unit);
+  overflow: hidden;
+}
+.welcome-container:after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0%;
+  left: 0%;
+  background: linear-gradient(144deg, #37FF8B, #000 50%, #37FF8B);
+  filter: blur(20px);
+  pointer-events: none;
+  animation: keyframes-intro 1s ease-in forwards;
+}
+@keyframes keyframes-intro {
+  100% {
+    ransform: translate(-100%);
+    opacity: 0;
+  }
 }
 
 
 .title {
   font-size: 32px;
   font-weight: bold;
-  color: #333;
+  color: #fff;
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
 }
 
 .rules-heading {
   font-size: 18px;
-  color: #666;
+  color: #fff;
   margin-top: 10px;
 }
 
