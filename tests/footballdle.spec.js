@@ -16,40 +16,60 @@ test.describe('Footballdle Game View', () => {
     await expect(page.locator('input[data-testid="guess-input"]')).toBeVisible();
   });
 
-  test('displays winning message after correct guess', async ({ page }) => {
 
-    await page.getByText('Start Game').click();
+  test('plays game and verifies winning message & guess history', async ({ page }) => {
+  await page.getByText('Start Game').click();
 
-    const allPlayers = ['Lionel Messi', 'Cristiano Ronaldo'];
+      const allPlayers = [
+  'Bruno Fernandes',
+  'Bernardo Silva',
+  'Nuno Tavares',
+  'Juan Mata',
+  'Rodri',
+  'Mikel Merino',
+  'Marouane Fellaini',
+  'Leandro Trossard',
+  'Jérémy Doku',
+  'Michy Batshuayi',
+  'André Gomes',
+  'Pedro Neto',
+  'Paul Pogba',
+  'Olivier Giroud',
+  'Thierry Henry',
+  'Sergio Busquets',
+  'Jorginho',
+  'Riccardo Calafiori',
+  'Stephan El Shaarawy',
+  'Matteo Darmian',
+  'Bukayo Saka',
+  'Mason Mount',
+  'Marcus Rashford',
+  'Emiliano Martínez',
+  'Lisandro Martínez',
+  'Enzo Fernández',
+  'Marco Asensio',
+  'Ángel Di María'
+];
+  let guessCount = 0;
 
-    for (const name of allPlayers) {
-      await page.getByTestId('guess-input').fill(name);
+  for (const name of allPlayers) {
+    await page.getByTestId('guess-input').fill(name);
 
-      const suggestion = page.getByText(name);
-      await suggestion.click();
-      await page.getByText('Submit').click();
+    const suggestion = page.getByText(name);
+    await suggestion.click();
+    await page.getByText('Submit').click();
+    guessCount++;
 
-      const winMessage = page.locator('.winner');
-      if (await winMessage.isVisible()) {
-        await expect(winMessage).toContainText('Correct! The player was');
-        break;
-      }
+    const winMessage = page.locator('.winner');
+    if (await winMessage.isVisible()) {
+      await expect(winMessage).toContainText('Correct! The player was');
+      break;
     }
-  });
+  }
 
+  // After guessing correctly, verify the guess history
+  const historyRows = page.locator('.guess-table .guess-row');
+  await expect(historyRows).toHaveCount(guessCount + 1);
+});
 
-  test('displays guess history correctly', async ({ page }) => {
-
-    await page.getByText('Start Game').click();
-
-    const wrongGuesses = ['Cristiano Ronaldo', 'Lionel Messi'];
-    for (const guess of wrongGuesses) {
-      await page.getByTestId('guess-input').fill(guess);
-      await page.getByText(guess).click();
-      await page.getByText('Submit').click();
-    }
-
-    const historyRows = page.locator('.guess-table .guess-row');
-    await expect(historyRows).toHaveCount(wrongGuesses.length + 1);
-  });
 });
