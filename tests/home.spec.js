@@ -5,7 +5,7 @@ test.describe('HomeView Page', () => {
 
   test.beforeEach(async ({ page }) => {
     const baseURL = process.env.VITE_BASE_URL || 'http://localhost:5173';
-    await page.goto(`${baseURL}/footballapp/`); // Adjust the URL if needed
+    await page.goto(`${baseURL}/footballapp/`);
   });
 
   test('should render QuickPlayCard boxes', async ({ page }) => {
